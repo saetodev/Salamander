@@ -2,12 +2,7 @@
 #define SAL_RENDERER_H
 
 #include "Basic.h"
-
-struct Texture2D {
-    u32 id;
-    u32 width;
-    u32 height;
-};
+#include "Texture.h"
 
 namespace Renderer2D {
     void Init();
@@ -17,6 +12,7 @@ namespace Renderer2D {
     void End();
 
     void DrawRect(glm::vec2 position, glm::vec2 size, glm::vec4 color);
+    void DrawTexture(const Texture2D& tex, glm::vec2 position, glm::vec2 size, glm::vec4 color);
 }
 
 #endif
