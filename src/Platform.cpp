@@ -58,9 +58,15 @@ void Platform::Shutdown() {
 }
 
 void Platform::Run() {
-    glm::mat4 projection = glm::ortho(0.0f, 1280.0f, 720.0f, 0.0f, 0.0f, 1.0f);
+    glm::mat4 projection = glm::ortho(0.0f, (f32)m_settings.windowWidth, (f32)m_settings.windowHeight, 0.0f, 0.0f, 1.0f);
+
+    u32 lastTime = SDL_GetTicks();
 
     while (m_running) {
+        u32 nowTime   = SDL_GetTicks();
+        f32 deltaTime = (f32)(nowTime - lastTime) / 1000.0f;
+        lastTime = nowTime; 
+
         m_input.Clear();
         
         SDL_Event event;
@@ -91,7 +97,7 @@ void Platform::Run() {
         Renderer2D::Start(projection); 
         
         if (m_settings.updateFunc) {
-            m_settings.updateFunc(m_input);
+            m_settings.updateFunc(m_input, deltaTime);
         }
 
         Renderer2D::End();

@@ -12,7 +12,7 @@ struct Settings {
     int windowHeight;
     std::string windowTitle;
 
-    std::function<void(const Input&)> updateFunc;
+    std::function<void(const Input&, f32)> updateFunc;
 };
 
 namespace Platform {
