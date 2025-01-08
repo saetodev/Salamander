@@ -1,5 +1,8 @@
 #include "Renderer.h"
 
+#include "QuadVertexShader.h"
+#include "QuadFragmentShader.h"
+
 #include <glad/glad.h>
 
 #define MAX_QUAD_COUNT 256
@@ -152,6 +155,7 @@ void Renderer2D::Init() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * MAX_QUAD_COUNT * VERTICES_PER_QUAD, nullptr, GL_DYNAMIC_DRAW);
 
     // init shader
+#if 0
     char* vertexShaderSource   = ReadEntireFile("assets/quad_vertex.glsl");
     char* fragmentShaderSource = ReadEntireFile("assets/quad_fragment.glsl");
 
@@ -160,6 +164,10 @@ void Renderer2D::Init() {
 
     delete[] vertexShaderSource;
     delete[] fragmentShaderSource;
+#else
+    m_shader = CreateShader(quad_vertexData, quad_fragmentData);
+    glUseProgram(m_shader);
+#endif
 
     // init textures
     u32 pixels[] = { 0xFFFFFFFF };
